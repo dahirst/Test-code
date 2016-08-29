@@ -1,0 +1,148 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    
+    int n;
+    
+    cout << "Enter the number of values you have: "; // The user is asked how many values they have.
+    
+    cin >> n;                                        // The user enters a number 'n', which is then used to create an array of dimension 'n' in the next line.
+    
+    float array[n];
+    
+    
+    cout << "Enter your values:" << endl;            // The user is asked to enter their values. 
+    
+    for (int i=0; i<n; i++)                          // The user enters their 'n' values. Each value is entered into a new element of the array due to the for loop.
+    
+    {
+    
+    cin >> array[i];
+    
+    }
+    
+    int p, q;                                        // The next step is to order the array in ascending order. This makes finding the median much easier.
+    float temp;
+    
+    for (p=0; p <(n-1); p++) {                       // There are two for loops, one within the other. The first loops from the first element of the array to the penultimate, and the 
+                                                     // second loop, from the second value to the last in the array.
+        
+        for (q=(p+1); q < n; q++) {
+            
+            if (array[p] > array[q]) {               // This 'if' statement asks whether the value of element 'p' is greater than element 'p+1'. If so then it needs to be shifted to the right by swapping the two values.
+                
+                temp=array[p];
+                array[p]=array[q];                   // These three lines swap the two values in the array. For example, if element 'p' equals 5 and element 'p+1' equals 4 then the 'if' statement is satisfied.
+                array[q]=temp;                       // temp=5 and then array element 'p' equals 4 as well as array element 'p+1'. Finally array element 'p+1' is made to equal 5 thus swapping the two values.
+                                                     // Ultimately, over the course of the for loop, the lowest numbers are swapped down to the start of the array, and the high numbers to the end.
+            }
+            
+        }
+    }
+    
+
+   
+    float total=0;                                   // This section finds the mean of the values. The mean is found by summing all the values and divinding by how many there are, so we define
+                                                     // a float which will be the running total of the addition of the elements of the array.
+for (int j=0; j<n; j++)    
+   {
+      total = total + array[j];                      // The for loop runs through each element of the array, adding that value to the the previous total to make a new one.
+   }
+  
+  float mean = total/n;                              // There are 'n' values in the array, so we divide the total by 'n' to get the mean which is then printed out on the next line.
+  
+  cout << "The mean value is: " << mean << endl;
+
+
+
+
+
+
+if (n%2 == 0) {                                      // This section calculates the median. With the array in ascending order, the median will be the middle value/values. 'n' is found to be even or odd depending on whehter it has a remainder when divided by 2.
+                                                     // If 'n' is even there will be two median values: the 'n/2' element and the '(n/2)-1' element of the array (due to the array starting at element zero).
+    int t = n/2 -1;
+    int s = (n/2);
+    float median1=array[t];
+    float median2=array[s];
+    
+    float mp=(median1 + median2)/2;
+    
+    cout << "The median values are: " << median1 << " and " << median2 << endl;
+    cout << "The mid-point of these two values is " << mp << endl;
+}
+  
+if (n%2 > 0) {                                       // If 'n' is odd, the median will be the value of the '(n-1)/2' element in the array.
+    
+    int t = (n-1)/2;
+    float median = array[t];
+    
+    cout << "The median value: " << median << endl;
+    
+    
+} 
+  
+                                                     // The final section finds the mode of the values. First of all, several new variables are needed.  
+  
+int c=0;                                             // This term is a counter for how many times each number appears.                    
+int nmode=0;                                         // This term is used to determine whether there is a modal value.
+float B[n];                                          // An array for storing the value of 'c' after each run.
+int max=0;                                           // This variable is used for the maximum value that 'c' reaches.
+
+                                                     // Nested for loops are used to compare each element of the array to all the others to see if they have the same value.
+
+for (int i=0; i<n; i++) {                            // The first for loop goes through the elements of the original array from the 'i'th element to the final element.
+    
+    for (int j=(i+1); j<n; j++) {                    // The nested for loop goes from the 'i+1'th element to the final element. This is done so as not to double count values.
+        
+        if (array[i] == array[j]) {                  // If two elements have the same value then the count increases.
+        
+        c++;
+    }
+    }
+   
+    B[i]=c;                                          // For element 'i' the total number of other elements which have the same value 'c', is stored in a second arrary.
+    
+       
+    
+    
+if (c > 0) {                                         // If the count is greater than zero then there must be at least one value which appears twice and thus there is a mode. Therefore the no-mode variable value is increased.
+    
+    nmode++;
+}
+ 
+ c=0;
+    
+}
+
+if (nmode==0) {                                      // If, after all elements have been compared, 'nmode' is still equal to zero, then each value only appears once and there is no mode.
+    
+    cout << "There is no modal value" << endl;
+}
+
+
+for (int k=0; k<n; k++) {                            // This for loops goes through all the elements of the second array and finds the highest value i.e. biggest count. Max is set equal to this value and then updated if a higher value is found.
+    
+  if(B[k]>max) {
+      
+      max=B[k];
+  }  
+    
+}
+
+int l=0;
+float C[n];
+
+for (int q=0; q<n; q++) {                            // This loop uses the condition 'B[q]=max' to find the most common value and then eneters the corresponding value from the original array into a thrid array.
+    
+    if (B[q]=max and B[q] > 0) {                     // This third array will now only contain the modal values. (B[q]>0 required incase each number appears only once, i.e. no mode).
+        
+        C[l]=array[q];
+       
+        l++;
+        
+    }
+}
+
