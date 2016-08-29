@@ -45,7 +45,7 @@ int main()
     
 
    
-    float total=0;                                   // This section finds the mean of the values. The mean is found by summing all the values and divinding by how many there are, so we define
+    float total=0;                                   // This section finds the mean of the values. The mean is found by summing all the values and dividing by how many there are, so we define
                                                      // a float which will be the running total of the addition of the elements of the array.
 for (int j=0; j<n; j++)    
    {
@@ -146,3 +146,21 @@ for (int q=0; q<n; q++) {                            // This loop uses the condi
     }
 }
 
+
+if (l==1) {                                          // If 'l==1' then only one value is in the third array and thus there is only one modal value.
+    
+    cout << "The modal value is: " << C[0] << endl;
+    
+}
+    
+if (l>1 and l!=n) {                                  // If 'l>1' then there are multiple modal values, all of which are printed thanks to the for loop.
+    
+    for (int i=0; i<l; i++) {
+        
+        cout <<"A modal value is: " << C[i] <<endl;
+    }
+}    
+    
+
+
+}
